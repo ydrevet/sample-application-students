@@ -11,3 +11,10 @@ spring:
     url: "jdbc:postgresql://localhost:5432/SchoolOrganisation"
     username: takima
     password: takimapass
+management:
+  server:
+    add-application-context-header: false
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,metrics,beans,configprops

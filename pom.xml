@@ -7,8 +7,8 @@
     <artifactId>sample-application</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-        <module>sample-application-db-changelog-job</module>
-        <module>sample-application-http-api-server</module>
+        <module>sample-application-db-migration</module>
+        <module>sample-application-backend</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -41,7 +41,7 @@
         <dependencies>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>sample-application-db-changelog-job</artifactId>
+                <artifactId>sample-application-db-migration</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

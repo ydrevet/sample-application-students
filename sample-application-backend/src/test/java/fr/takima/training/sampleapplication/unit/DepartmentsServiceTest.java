@@ -36,11 +36,11 @@ public class DepartmentsServiceTest {
 
     @Test
     public void testGetDepartmentByNameWithNullValue() {
-        assertThrows(IllegalArgumentException.class, () -> departmentService.getDepartmentByName(null));
+        assertThrows(IllegalArgumentException.class, () -> departmentService.getByName(null));
     }
 
     @Test
     public void testGetDepartmentByNameWithEmptyValue() {
-        assertThrows(IllegalArgumentException.class, () -> departmentService.getDepartmentByName(""));
+        assertThrows(IllegalArgumentException.class, () -> departmentService.getByName(""));
     }
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/departments")
+@RequestMapping(value = "/api/departments")
 public class DepartmentController {
     private DepartmentService departmentService;
     private StudentService studentService;
@@ -24,33 +24,35 @@ public class DepartmentController {
         this.studentService = studentService;
     }
 
+    @GetMapping
+    public ResponseEntity<Object> getAll() {
+        return ResponseEntity.ok(departmentService.getAll());
+    }
+
     @GetMapping("/{departmentName}/students")
     public ResponseEntity<Object> getDepartmentList(@PathVariable(name="departmentName") String name) {
-        Optional<Department> optionalDepartment = Optional.ofNullable(this.departmentService.getDepartmentByName(name));
+        Optional<Department> optionalDepartment = Optional.ofNullable(this.departmentService.getByName(name));
         if (!optionalDepartment.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-
         return ResponseEntity.ok(this.studentService.getStudentsByDepartmentName(name));
     }
 
     @GetMapping("/{departmentName}")
     public ResponseEntity<Object> getDepartmentByName(@PathVariable(name="departmentName") String name) {
-        Optional<Department> optionalDepartment = Optional.ofNullable(this.departmentService.getDepartmentByName(name));
+        Optional<Department> optionalDepartment = Optional.ofNullable(this.departmentService.getByName(name));
         if (!optionalDepartment.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-
-        return ResponseEntity.ok(this.departmentService.getDepartmentByName(name));
+        return ResponseEntity.ok(this.departmentService.getByName(name));
     }
 
     @GetMapping("/{departmentName}/count")
     public ResponseEntity<Object> getDepartmentCountByName(@PathVariable(name="departmentName") String name) {
-        Optional<Department> optionalDepartment = Optional.ofNullable(this.departmentService.getDepartmentByName(name));
+        Optional<Department> optionalDepartment = Optional.ofNullable(this.departmentService.getByName(name));
         if (!optionalDepartment.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-
         return ResponseEntity.ok(this.studentService.getStudentsNumberByDepartmentName(name));
     }
 }

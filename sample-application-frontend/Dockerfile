@@ -1,18 +1,21 @@
 FROM node:12.16.3-stretch-slim AS build
 
-WORKDIR /opt/front
+WORKDIR /tmp/front
 
 COPY src/ src/
 COPY public/ public/
 COPY package.json .
-COPY yarn.lock .
-COPY default.conf .
-COPY .env.production .
+COPY package-lock.json* .
+COPY httpd.conf .
 
 RUN npm install
 RUN npm run build
 
-FROM nginx:1.15.7-alpine
+FROM httpd:2.4
 
-COPY --from=build /opt/front/dist /usr/share/nginx/html/
-COPY --from=build /opt/front/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /tmp/front/httpd.conf /usr/local/apache2/conf/httpd.conf
+COPY --from=build /tmp/front/dist /usr/local/apache2/htdocs
+
+EXPOSE 80
+
+CMD ["httpd", "-D", "FOREGROUND"]

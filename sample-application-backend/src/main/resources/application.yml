@@ -16,5 +16,6 @@ management:
     add-application-context-header: false
   endpoints:
     web:
+      base-path: /api/actuator
       exposure:
         include: health,info,env,metrics,beans,configprops,prometheus

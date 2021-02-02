@@ -17,8 +17,13 @@ jobs:
         - cd sample-application-frontend
       script:
         - npm run test
+    - stage: "Publish"
+      script:
+        - cd sample-application-backend
+        - docker build -t ydrevet/simpleapp-back:latest .
+        - docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
+        - docker push ydrevet/simpleapp-back:latest
 cache:
   directories:
     - "$HOME/.m2/repository"
-    - "$HOME/.npm"
-
+    - "$HOME/.npm

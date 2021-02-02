@@ -11,7 +11,7 @@
 
       <a-col :xs="24" :sm="22" :md="12" :lg="8" :xl="5">
         <a-row class="student" v-for="student in students" :key="student.id">
-          <a-col span="24">{{ student.firstname }} - {{ student.lastname }}</a-col>
+          <a-col span="24">{{ student.firstname }} {{ student.lastname }}</a-col>
         </a-row>
       </a-col>
 

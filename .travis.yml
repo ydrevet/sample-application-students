@@ -8,6 +8,8 @@ jobs:
       jdk: oraclejdk11
       before_script:
         - cd sample-application-backend
+      script:
+        - mvn clean verify
     - stage: "Build and Test Nodejs"
       language: node_js
       node_js: "12.20"

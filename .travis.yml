@@ -4,25 +4,31 @@ git:
 jobs:
   include:
     - stage: "Build and Test Java"
-      language: java
-      jdk: oraclejdk11
+      language: "java"
+      jdk: "oraclejdk11"
       before_script:
-        - cd sample-application-backend
+        - "cd sample-application-backend"
       script:
-        - mvn clean verify
+        - "mvn clean verify"
     - stage: "Build and Test Nodejs"
-      language: node_js
+      language: "node_js"
       node_js: "12.20"
       before_script:
-        - cd sample-application-frontend
+        - "cd sample-application-frontend"
       script:
-        - npm run test
+        - "npm run test"
     - stage: "Publish"
       script:
-        - cd sample-application-backend
-        - docker build -t ydrevet/simpleapp-back:latest .
-        - docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
-        - docker push ydrevet/simpleapp-back:latest
+        - "cd sample-application-backend"
+        - "docker build -t ydrevet/simpleapp-back:latest ."
+        - "docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD"
+        - "docker push ydrevet/simpleapp-back:latest"
+    - stage: "Publish"
+      script:
+        - "cd sample-application-frontend"
+        - "docker build -t ydrevet/simpleapp-front:latest ."
+        - "docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD"
+        - "docker push ydrevet/simpleapp-front:latest"
 cache:
   directories:
     - "$HOME/.m2/repository"

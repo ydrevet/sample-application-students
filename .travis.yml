@@ -26,4 +26,4 @@ jobs:
 cache:
   directories:
     - "$HOME/.m2/repository"
-    - "$HOME/.npm
+    - "$HOME/.npm"

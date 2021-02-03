@@ -9,7 +9,9 @@ jobs:
       before_script:
         - "cd sample-application-backend"
       script:
-        - "mvn clean verify org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=$SONARCLOUD_PROJECTKEY"
+        - "mvn clean verify" 
+        - "mvn org.jacoco:jacoco-maven-plugin:prepare-agent" 
+        - "mvn sonar:sonar -Dsonar.projectKey=$SONARCLOUD_PROJECTKEY"
     - stage: "Build and Test Nodejs"
       language: "node_js"
       node_js: "12.20"

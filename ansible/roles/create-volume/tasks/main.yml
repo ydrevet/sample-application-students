@@ -1,0 +1,7 @@
+---
+# Create network
+- name: Create db-volume volume
+  docker_volume:
+    name: db-volume
+    state: present
+

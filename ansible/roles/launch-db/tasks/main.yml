@@ -1,0 +1,19 @@
+---
+# Launch database
+- name: Launch database container
+  docker_container:
+    name: database
+    state: started
+    image: postgres:12.0-alpine
+    env:
+      POSTGRES_USER: takima
+      POSTGRES_PASSWORD: takimapass
+      POSTGRES_DB: SchoolOrganisation
+    purge_networks: yes
+    networks:
+      - name: myapp-net
+    volumes:
+      - db-volume:/var/lib/postgresql/data
+
+
+

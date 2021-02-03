@@ -1,0 +1,45 @@
+# Install Docker
+- name: Add Docker stable repository
+  yum_repository:
+    name: docker-ce
+    description: Docker CE Stable - $basearch
+    baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
+    state: present
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://download.docker.com/linux/centos/gpg
+
+- name: Install Docker
+  yum:
+    name: docker-ce
+    state: present
+
+- name: Create docker group
+  group:
+    name: docker
+
+- name: Add centos user do docker group
+  user:
+    name: centos
+    append: yes
+    groups:
+      - docker
+
+- name: Make sure Docker is running
+  service: name=docker state=started
+  tags: docker
+
+- name: Enable EPEL repository to be able to install pip
+  yum:
+    name: epel-release
+    state: present
+
+- name: Install pip for Docker Python SDK
+  yum:
+    name: python-pip
+    state: present
+
+- name: Install Docker Python SDK
+  pip:
+    name: docker
+    state: present

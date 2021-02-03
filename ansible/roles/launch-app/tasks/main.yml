@@ -1,0 +1,14 @@
+---
+# Launch app
+- name: Launch backend
+  docker_container:
+    name: backend
+    state: started
+    image: ydrevet/simpleapp-back:latest
+    env:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/SchoolOrganisation
+    purge_networks: yes
+    networks:
+      - name: myapp-net
+
+

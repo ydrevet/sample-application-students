@@ -38,9 +38,9 @@ jobs:
         - "openssl aes-256-cbc -K $encrypted_c02febb1adb2_key -iv $encrypted_c02febb1adb2_iv -in deploy_key.enc -out deploy_key -d"
         - "chmod 0400 deploy_key"
       script:
-        - "ssh -i deploy_key centos@yoann.drevet.takima.cloud docker stop backend"
-        - "ssh -i deploy_key centos@yoann.drevet.takima.cloud docker remove backend"
-        - "ssh -i deploy_key centos@yoann.drevet.takima.cloud docker run --net myapp-net --name backend -d -p 80:80 ydrevet/simpleapp-back"
+        - "ssh -i deploy_key -o StrictHostKeyChecking=no centos@yoann.drevet.takima.cloud docker stop backend"
+        - "ssh -i deploy_key -o StrictHostKeyChecking=no centos@yoann.drevet.takima.cloud docker remove backend"
+        - "ssh -i deploy_key -o StrictHostKeyChecking=no centos@yoann.drevet.takima.cloud docker run --net myapp-net --name backend -d -p 80:80 ydrevet/simpleapp-back"
       on:
         branch: production
 cache:
